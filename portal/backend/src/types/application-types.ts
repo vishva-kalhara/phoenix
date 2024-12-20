@@ -10,6 +10,7 @@ export interface IApplication {
         validityInDays: number;
         price: number;
     }[];
+    stripeSectretKey: string;
     isActive: boolean;
     createdAt: Date;
 }

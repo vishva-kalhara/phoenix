@@ -31,6 +31,10 @@ const applicationSchema = new Schema<IApplication>({
             },
         },
     ],
+    stripeSectretKey: {
+        type: String,
+        required: true,
+    },
     isActive: {
         type: Boolean,
         default: true,

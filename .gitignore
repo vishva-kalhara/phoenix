@@ -1,3 +1,5 @@
 portal/backend/node_modules/
 portal/backend/dist/
 portal/backend/.env
+/libraries/java-ant/phoenix-java-ant/nbproject/private/
+/libraries/java-ant/phoenix-java-ant/build/
