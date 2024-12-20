@@ -1,14 +1,17 @@
 import mongoose from "mongoose";
 import { IUserDoc } from "./user-types";
 
-export interface IApplicationDoc extends mongoose.Document {
+export interface IApplication {
     user: IUserDoc;
     name: string;
     appSecret: string;
     plans: {
+        planName: string;
         validityInDays: number;
         price: number;
     }[];
     isActive: boolean;
     createdAt: Date;
 }
+
+export interface IApplicationDoc extends mongoose.Document, IApplication {}

@@ -8,8 +8,6 @@ export const syncUserWithDB = async (
     next: NextFunction
 ) => {
     try {
-        console.log("touched");
-
         const user = await User.create({
             email: "req.body.email",
             apiKey: "uuid.v4()",
