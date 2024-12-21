@@ -3,10 +3,11 @@ import {
     hasSubscription,
     issueSubscription,
 } from "../controllers/subscription-controller";
+import { useAuthHeader } from "../middlewares/use-auth-header";
 
 const router = Router();
 
-router.route("/").post(issueSubscription);
+router.route("/").post(useAuthHeader, issueSubscription);
 
 router.get("/has-subscription", hasSubscription);
 

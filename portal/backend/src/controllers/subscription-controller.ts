@@ -8,6 +8,7 @@ export const issueSubscription = async (
     next: NextFunction
 ) => {
     try {
+        console.log("issued subscription");
     } catch (error) {
         console.error(error);
         next(new AppError("Unknown Error Occured!", 500));
@@ -20,6 +21,7 @@ export const hasSubscription = async (
     next: NextFunction
 ) => {
     try {
+        res.status(200).json({ status: "success" });
     } catch (error) {
         console.error(error);
         next(new AppError("Unknown Error Occured!", 500));

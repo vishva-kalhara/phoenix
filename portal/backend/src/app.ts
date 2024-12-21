@@ -4,6 +4,7 @@ import errorMiddleware from "./middlewares/error-middleware";
 import applicationRouter from "./routers/application-router";
 import userRouter from "./routers/user-router";
 import subscriptionRouter from "./routers/subscription-router";
+import paymentRouter from "./routers/payment-router";
 
 export const createApp = () => {
     const app = express();
@@ -17,6 +18,7 @@ export const createApp = () => {
     app.use("/api/v1/applications", applicationRouter);
     app.use("/api/v1/users", userRouter);
     app.use("/api/v1/subscriptions", subscriptionRouter);
+    app.use("/api/v1/payments", paymentRouter);
 
     app.all("*", (req, _res, next) => {
         next(new AppError(`Can't find ${req.originalUrl} on the server!`, 404));
