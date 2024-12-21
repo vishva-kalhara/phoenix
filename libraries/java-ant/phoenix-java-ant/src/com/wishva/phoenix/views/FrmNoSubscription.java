@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package com.wishva.phoenix.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
@@ -56,7 +56,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(30, 30, 30));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no-subscription-heading.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/wishva/phoenix/assets/no-subscription-heading.png"))); // NOI18N
 
         btnSubscribe.setBackground(new java.awt.Color(198, 252, 166));
         btnSubscribe.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
@@ -93,7 +93,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
                 .addComponent(btnSubscribe, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
