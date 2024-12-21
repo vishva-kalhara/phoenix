@@ -6,6 +6,7 @@ package com.wishva.phoenix.demo;
 
 import com.wishva.phoenix.Phoenix;
 import com.wishva.phoenix.utils.PhoenixException;
+import com.wishva.phoenix.utils.PhoenixNoSubscriptionException;
 
 /**
  *
@@ -17,11 +18,14 @@ public class Start {
 
         try {
 
-            new Phoenix("my-api-key", "my-app-secret", "my-stripe-secret").protect();
+            new Phoenix("uuid.v4()", "c6779278-bdbb-428c-9a46-d84fcc067fe2", "my-stripe-secret").protect();
             
             System.out.println("Has access");
+        } catch(PhoenixNoSubscriptionException e){
+            
         } catch (PhoenixException | IllegalArgumentException e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }

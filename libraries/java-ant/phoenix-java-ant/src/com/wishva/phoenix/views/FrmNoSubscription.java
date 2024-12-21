@@ -6,6 +6,7 @@ package com.wishva.phoenix.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,9 @@ public class FrmNoSubscription extends javax.swing.JFrame {
      */
     public FrmNoSubscription() {
         initComponents();
+
+        this.setIconImage(new ImageIcon(getClass().getResource("/com/wishva/phoenix/assets/logo.png")).getImage());
+        
         setDesign();
     }
 
@@ -32,6 +36,8 @@ public class FrmNoSubscription extends javax.swing.JFrame {
 
         btnSubscribe.putClientProperty("JButton.buttonType", "roundRect");
         btnClose.putClientProperty("JButton.buttonType", "roundRect");
+        
+        btnClose.putClientProperty("JButton.outline", new Color(30,30,30));
 
     }
 
@@ -112,7 +118,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        
+
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 

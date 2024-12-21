@@ -9,6 +9,6 @@ const router = Router();
 
 router.route("/").post(useAuthHeader, issueSubscription);
 
-router.post("/has-subscription", hasSubscription);
+router.post("/has-subscription", useAuthHeader, hasSubscription);
 
 export default router;

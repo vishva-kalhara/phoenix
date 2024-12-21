@@ -7,6 +7,7 @@ export interface ISubscription {
     createdAt: Date;
     amount: number;
     validityInDays: number;
+    expiresAt: Date;
 }
 
 export interface ISubscriptionDoc extends mongoose.Document, ISubscription {}

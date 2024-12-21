@@ -7,6 +7,7 @@ package com.wishva.phoenix.views;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,8 @@ public class FrmVerifying extends javax.swing.JFrame {
      */
     public FrmVerifying() {
         initComponents();
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/com/wishva/phoenix/assets/logo.png")).getImage());
 
         setDesign();
     }
@@ -104,8 +107,10 @@ public class FrmVerifying extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setTitle("Phoenix is verifying...");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImages(null);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(30, 30, 30));

@@ -22,6 +22,10 @@ const subscriptionSchema = new Schema<ISubscriptionDoc>({
         type: Number,
         required: true,
     },
+    expiresAt: {
+        type: Date,
+        required: true,
+    },
 });
 
 export default mongoose.model<ISubscriptionDoc>(

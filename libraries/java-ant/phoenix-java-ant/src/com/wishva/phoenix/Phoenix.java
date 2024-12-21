@@ -6,6 +6,7 @@ package com.wishva.phoenix;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.wishva.phoenix.utils.PhoenixException;
+import com.wishva.phoenix.utils.PhoenixNoSubscriptionException;
 import com.wishva.phoenix.views.FrmNoSubscription;
 import com.wishva.phoenix.views.FrmVerifying;
 import java.awt.Desktop;
@@ -23,10 +24,10 @@ public class Phoenix {
     private JFrame currentFrame = null;
 
     private String stripeSecret = null;
-    private String appSeret = null;
+    private String appSecret = null;
     private String apiKey = null;
 
-    public Phoenix(String apiKey, String appSeret, String stripeSecret) throws PhoenixException {
+    public Phoenix(String apiKey, String appSecret, String stripeSecret) throws PhoenixException {
 
         FlatMacLightLaf.registerCustomDefaultsSource("com.wishva.phoenix.styles");
         FlatMacLightLaf.setup();
@@ -41,19 +42,19 @@ public class Phoenix {
             e.printStackTrace();
         }
 
-        validateParams(apiKey, appSeret, stripeSecret);
+        validateParams(apiKey, appSecret, stripeSecret);
 
         this.apiKey = apiKey;
-        this.appSeret = appSeret;
+        this.appSecret = appSecret;
         this.stripeSecret = stripeSecret;
     }
 
-    private void validateParams(String apiKey, String appSeret, String stripeSecret) throws IllegalArgumentException {
+    private void validateParams(String apiKey, String appSecret, String stripeSecret) throws IllegalArgumentException {
 
         if (apiKey == null) {
             throw new IllegalArgumentException("API key is null");
         }
-        if (appSeret == null) {
+        if (appSecret == null) {
             throw new IllegalArgumentException("App secret is null");
         }
         if (stripeSecret == null) {
@@ -61,18 +62,20 @@ public class Phoenix {
         }
     }
 
-    public void protect() throws PhoenixException {
+    public void protect() throws PhoenixException, PhoenixNoSubscriptionException {
 
-        if (this.hasValidSubscription()) {
-            currentFrame.dispose();
-            return;
-        }
-
+        boolean hasAccess = this.hasValidSubscription();
         currentFrame.dispose();
-        currentFrame = new FrmNoSubscription();
-        currentFrame.setVisible(true);
+        if (!hasAccess) {
 
-        throw new PhoenixException("No Subscription Found.");
+            new FrmNoSubscription().setVisible(true);
+            throw new PhoenixNoSubscriptionException("No Subscription Found.");
+        }
+    }
+    
+    private String getClientId(){
+        
+        return "clientIdss0";
     }
 
     private boolean hasValidSubscription() throws PhoenixException {
@@ -96,7 +99,8 @@ public class Phoenix {
 
             // Prepare JSON body
             String jsonInputString = "{"
-                    + "\"appSeret\":\"" + this.appSeret + "\","
+                    + "\"appSecret\":\"" + this.appSecret + "\","
+                    + "\"clientId\":\"" + getClientId() + "\","
                     + "\"stripeSecret\":\"" + this.stripeSecret + "\""
                     + "}";
 
@@ -115,16 +119,19 @@ public class Phoenix {
                     throw new PhoenixException("App Not Found!");
                 case HttpURLConnection.HTTP_OK:
                     return true;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    throw new PhoenixException("appSecret, clientId and stripeSecret key required");
+                case HttpURLConnection.HTTP_FORBIDDEN:
+                    return false;
                 default:
                     throw new PhoenixException("Unhandled Exception Occured! Status Code: " + responseCode);
             }
 
         } catch (Exception e) {
-            
-            if(e.getMessage().equals("Connection refused: connect")){
+
+            if (e.getMessage().equals("Connection refused: connect")) {
                 throw new PhoenixException("Please check your internet connection and try again.");
             }
-            
             throw new PhoenixException(e.getMessage());
         } finally {
             if (connection != null) {
