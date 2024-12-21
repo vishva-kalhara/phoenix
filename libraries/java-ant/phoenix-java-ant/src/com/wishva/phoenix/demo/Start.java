@@ -17,10 +17,10 @@ public class Start {
 
         try {
 
-            new Phoenix().protect();
+            new Phoenix("my-api-key", "my-app-secret", "my-stripe-secret").protect();
             
             System.out.println("Has access");
-        } catch (PhoenixException e) {
+        } catch (PhoenixException | IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
