@@ -2,6 +2,7 @@ import { NextFunction, Response, Request } from "express";
 import Stripe from "stripe";
 import AppError from "../utils/AppError";
 import applicationSchema from "../schemas/application-schema";
+import tokenSchema from "../schemas/token-schema";
 
 export const createCheckoutLink = async (
     req: Request,
@@ -9,9 +10,16 @@ export const createCheckoutLink = async (
     next: NextFunction
 ) => {
     try {
-        if (!req.body.stripeSecret || !req.body.appSecret) {
+        if (
+            !req.body.stripeSecret ||
+            !req.body.appSecret ||
+            !req.body.clientId
+        ) {
             return next(
-                new AppError("Stripe secret key and App Secret required", 400)
+                new AppError(
+                    "Stripe secret key, client Id and App Secret required",
+                    400
+                )
             );
         }
 
@@ -22,6 +30,8 @@ export const createCheckoutLink = async (
         if (!app) {
             return next(new AppError("Application not found", 404));
         }
+
+        const token = await tokenSchema.create({ clientId: req.body.clientId });
 
         const stripe = new Stripe(req.body.stripeSecret);
         const session = await stripe.checkout.sessions.create({
@@ -39,8 +49,8 @@ export const createCheckoutLink = async (
                 },
             ],
             mode: "payment", // Use 'payment' for one-time payments
-            success_url: "https://yourdomain.com/success", // Replace with your success URL
-            cancel_url: "https://yourdomain.com/cancel", // Replace with your cancel URL
+            success_url: `${process.env.BACKEND_URL}/subscriptions/issue-subscription?clientId=${req.body.clientId}&&appId=${app.id}&&amount=${app.plans[0].price}&&validityInDays=${app.plans[0].validityInDays}&&token=${token.token}`,
+            cancel_url: "https://yourdomain.com/cancel",
         });
 
         res.json({ url: session.url });

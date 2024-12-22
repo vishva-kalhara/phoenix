@@ -9,18 +9,18 @@ export const issueSubscription = async (
     next: NextFunction
 ) => {
     try {
-        const subscription = await subscriptionSchema.create({
-            clientId: req.body.clientId,
-            appId: req.body.appId,
-            amount: req.body.amount,
-            validityInDays: req.body.validityInDays,
+        await subscriptionSchema.create({
+            clientId: req.query.clientId,
+            appId: req.query.appId,
+            amount: req.query.amount,
+            validityInDays: req.query.validityInDays,
             expiresAt: new Date(
                 new Date().getTime() +
-                    req.body.validityInDays * 24 * 60 * 60 * 1000
+                    Number(req.query.validityInDays) * 24 * 60 * 60 * 1000
             ),
         });
 
-        res.status(201).json({ status: "success", data: subscription });
+        res.redirect(200, `${process.env.FRONTEND_URL}/subscription-success`);
     } catch (error) {
         console.error(error);
         next(new AppError("Unknown Error Occured!", 500));
