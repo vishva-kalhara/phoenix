@@ -21,10 +21,6 @@ export const createApp = async (
             return next(new AppError("At least one plan is required", 400));
         }
 
-        if (!req.body.stripeSectretKey) {
-            return next(new AppError("Stripe secret key is required", 400));
-        }
-
         for (const plan of req.body.plans) {
             if (!plan.planName || !plan.validityInDays || !plan.price) {
                 return next(
@@ -48,7 +44,6 @@ export const createApp = async (
             name: req.body.name,
             appSecret: uuidv4(),
             plans: req.body.plans,
-            stripeSectretKey: req.body.stripeSectretKey,
         });
 
         res.status(201).json({
