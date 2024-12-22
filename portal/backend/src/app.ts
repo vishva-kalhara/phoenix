@@ -5,6 +5,7 @@ import applicationRouter from "./routers/application-router";
 import userRouter from "./routers/user-router";
 import subscriptionRouter from "./routers/subscription-router";
 import paymentRouter from "./routers/payment-router";
+import tokenRouter from "./routers/tokens-router";
 import morgan from "morgan";
 
 export const createApp = () => {
@@ -25,6 +26,7 @@ export const createApp = () => {
     app.use("/api/v1/users", userRouter);
     app.use("/api/v1/subscriptions", subscriptionRouter);
     app.use("/api/v1/payments", paymentRouter);
+    app.use("/api/v1/tokens", tokenRouter);
 
     app.all("*", (req, _res, next) => {
         next(new AppError(`Can't find ${req.originalUrl} on the server!`, 404));

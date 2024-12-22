@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/vs_code_proj/phoenix/sdk/java-ant/phoenix-java-ant/src/com/wishva/phoenix/Phoenix.java</file>
+            <file>file:/D:/vs_code_proj/phoenix/sdk/java-ant/phoenix-java-ant/src/com/wishva/phoenix/views/FrmVerifying.java</file>
+            <file>file:/D:/vs_code_proj/phoenix/sdk/java-ant/phoenix-java-ant/src/com/wishva/phoenix/views/FrmNoSubscription.java</file>
+            <file>file:/D:/vs_code_proj/phoenix/sdk/java-ant/phoenix-java-ant/src/com/wishva/phoenix/utils/ClientData.java</file>
             <file>file:/D:/vs_code_proj/phoenix/sdk/java-ant/phoenix-java-ant/src/com/wishva/phoenix/demo/Start.java</file>
         </group>
     </open-files>

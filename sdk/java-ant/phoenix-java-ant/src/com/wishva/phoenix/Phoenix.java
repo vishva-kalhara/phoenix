@@ -119,7 +119,7 @@ public class Phoenix {
             }
 
         } catch (Exception e) {
-
+            
             if (e.getMessage().equals("Connection refused: connect")) {
                 throw new PhoenixException("Please check your internet connection and try again.");
             }

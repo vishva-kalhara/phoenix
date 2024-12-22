@@ -26,7 +26,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
 
     private String stripeSecret = null;
     private String appSecret = null;
-        private String apiKey = null;
+    private String apiKey = null;
 
     /**
      * Creates new form FrmNoSubscription
@@ -42,7 +42,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
 
         setDesign();
 
-                this.apiKey = apiKey;
+        this.apiKey = apiKey;
         this.appSecret = appSecret;
         this.stripeSecret = stripeSecret;
     }
@@ -88,7 +88,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
 
         btnSubscribe.setBackground(new java.awt.Color(198, 252, 166));
         btnSubscribe.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
-        btnSubscribe.setText("Subscribe for 30 days");
+        btnSubscribe.setText("Subscribe Now");
         btnSubscribe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubscribeActionPerformed(evt);
@@ -152,9 +152,9 @@ public class FrmNoSubscription extends javax.swing.JFrame {
     private void btnSubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeActionPerformed
 
         try {
-            
-            Desktop.getDesktop().browse(new URI(getCheckoutLink())); 
-            
+
+            Desktop.getDesktop().browse(new URI(getCheckoutLink()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,7 +165,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
         HttpURLConnection connection = null;
 
         try {
-            
+
             if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 throw new PhoenixException("Cannot detect the default browser.");
             }
@@ -207,8 +207,8 @@ public class FrmNoSubscription extends javax.swing.JFrame {
                         response.append(responseLine.trim());
                     }
 
-                        JSONObject jsonResponse = new JSONObject(response.toString());
-                    
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+
                     return jsonResponse.getString("url");
                 }
                 case HttpURLConnection.HTTP_BAD_REQUEST:

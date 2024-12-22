@@ -50,7 +50,7 @@ export const createCheckoutLink = async (
             ],
             mode: "payment", // Use 'payment' for one-time payments
             success_url: `${process.env.BACKEND_URL}/subscriptions/issue-subscription?clientId=${req.body.clientId}&&appId=${app.id}&&amount=${app.plans[0].price}&&validityInDays=${app.plans[0].validityInDays}&&token=${token.token}`,
-            cancel_url: "https://yourdomain.com/cancel",
+            cancel_url: `${process.env.BACKEND_URL}/tokens/delete-token/${token.token}`,
         });
 
         res.json({ url: session.url });
