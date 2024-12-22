@@ -18,7 +18,7 @@ public class Start {
 
         try {
 
-            new Phoenix("uuid.v4()", "c6779278-bdbb-428c-9a46-d84fcc067fe2", "my-stripe-secret").protect();
+            new Phoenix("uuid.v4()", "c6779278-bdbb-428c-9a46-d84fcc067fe2", "").protect();
             
             System.out.println("Has access");
         } catch(PhoenixNoSubscriptionException e){

@@ -4,6 +4,6 @@ import { createCheckoutLink } from "../controllers/payment-controller";
 
 const router = Router();
 
-router.route("/create-checkout-link").post(createCheckoutLink);
+router.route("/create-checkout-link").post(useAuthHeader, createCheckoutLink);
 
 export default router;

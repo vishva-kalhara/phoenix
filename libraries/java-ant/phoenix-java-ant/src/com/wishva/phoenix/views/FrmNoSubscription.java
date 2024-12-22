@@ -5,8 +5,18 @@
 package com.wishva.phoenix.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.wishva.phoenix.utils.ClientData;
+import com.wishva.phoenix.utils.PhoenixException;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import javax.swing.ImageIcon;
+import org.json.JSONObject;
 
 /**
  *
@@ -14,15 +24,27 @@ import javax.swing.ImageIcon;
  */
 public class FrmNoSubscription extends javax.swing.JFrame {
 
+    private String stripeSecret = null;
+    private String appSecret = null;
+        private String apiKey = null;
+
     /**
      * Creates new form FrmNoSubscription
+     *
+     * @param apiKey
+     * @param appSecret
+     * @param stripeSecret
      */
-    public FrmNoSubscription() {
+    public FrmNoSubscription(String apiKey, String appSecret, String stripeSecret) {
         initComponents();
 
         this.setIconImage(new ImageIcon(getClass().getResource("/com/wishva/phoenix/assets/logo.png")).getImage());
-        
+
         setDesign();
+
+                this.apiKey = apiKey;
+        this.appSecret = appSecret;
+        this.stripeSecret = stripeSecret;
     }
 
     private void setDesign() {
@@ -36,8 +58,8 @@ public class FrmNoSubscription extends javax.swing.JFrame {
 
         btnSubscribe.putClientProperty("JButton.buttonType", "roundRect");
         btnClose.putClientProperty("JButton.buttonType", "roundRect");
-        
-        btnClose.putClientProperty("JButton.outline", new Color(30,30,30));
+
+        btnClose.putClientProperty("JButton.outline", new Color(30, 30, 30));
 
     }
 
@@ -67,6 +89,11 @@ public class FrmNoSubscription extends javax.swing.JFrame {
         btnSubscribe.setBackground(new java.awt.Color(198, 252, 166));
         btnSubscribe.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
         btnSubscribe.setText("Subscribe for 30 days");
+        btnSubscribe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubscribeActionPerformed(evt);
+            }
+        });
 
         btnClose.setBackground(new java.awt.Color(30, 30, 30));
         btnClose.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
@@ -122,6 +149,86 @@ public class FrmNoSubscription extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    private void btnSubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeActionPerformed
+
+        try {
+            
+            Desktop.getDesktop().browse(new URI(getCheckoutLink())); 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSubscribeActionPerformed
+
+    private String getCheckoutLink() throws PhoenixException {
+
+        HttpURLConnection connection = null;
+
+        try {
+            
+            if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                throw new PhoenixException("Cannot detect the default browser.");
+            }
+
+            URL apiUrl = new URL("http://localhost:3000/api/v1/payments/create-checkout-link");
+
+            connection = (HttpURLConnection) apiUrl.openConnection();
+
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + this.apiKey);
+            connection.setDoOutput(true); // Enable sending request body
+
+            // Prepare JSON body
+            String jsonInputString = "{"
+                    + "\"appSecret\":\"" + this.appSecret + "\","
+                    + "\"clientId\":\"" + new ClientData().getClientId() + "\","
+                    + "\"stripeSecret\":\"" + this.stripeSecret + "\""
+                    + "}";
+
+            // Write JSON data to request body
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = connection.getResponseCode();
+            switch (responseCode) {
+
+                case HttpURLConnection.HTTP_UNAUTHORIZED:
+                    throw new PhoenixException("Unauthorized!");
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    throw new PhoenixException("App Not Found!");
+                case HttpURLConnection.HTTP_OK:
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+
+                        JSONObject jsonResponse = new JSONObject(response.toString());
+                    
+                    return jsonResponse.getString("url");
+                }
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    throw new PhoenixException("appSecret, clientId and stripeSecret key required");
+                default:
+                    throw new PhoenixException("Unhandled Exception Occured! Status Code: " + responseCode);
+            }
+
+        } catch (Exception e) {
+
+            if (e.getMessage().equals("Connection refused: connect")) {
+                throw new PhoenixException("Please check your internet connection and try again.");
+            }
+            throw new PhoenixException(e.getMessage());
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

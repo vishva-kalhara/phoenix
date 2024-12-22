@@ -20,7 +20,7 @@ export const issueSubscription = async (
             ),
         });
 
-        res.redirect(200, `${process.env.FRONTEND_URL}/subscription-success`);
+        res.redirect(`${process.env.FRONTEND_URL}/subscription-success`);
     } catch (error) {
         console.error(error);
         next(new AppError("Unknown Error Occured!", 500));
@@ -33,16 +33,9 @@ export const hasSubscription = async (
     next: NextFunction
 ) => {
     try {
-        if (
-            !req.body.appSecret ||
-            !req.body.stripeSecret ||
-            !req.body.clientId
-        ) {
+        if (!req.body.appSecret || !req.body.clientId) {
             return next(
-                new AppError(
-                    "appSecret, clientId and stripeSecret key required",
-                    400
-                )
+                new AppError("appSecret and clientId key required", 400)
             );
         }
 

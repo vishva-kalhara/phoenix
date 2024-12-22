@@ -5,6 +5,7 @@
 package com.wishva.phoenix;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.wishva.phoenix.utils.ClientData;
 import com.wishva.phoenix.utils.PhoenixException;
 import com.wishva.phoenix.utils.PhoenixNoSubscriptionException;
 import com.wishva.phoenix.views.FrmNoSubscription;
@@ -68,14 +69,9 @@ public class Phoenix {
         currentFrame.dispose();
         if (!hasAccess) {
 
-            new FrmNoSubscription().setVisible(true);
+            new FrmNoSubscription(this.apiKey, this.appSecret, this.stripeSecret).setVisible(true);
             throw new PhoenixNoSubscriptionException("No Subscription Found.");
         }
-    }
-    
-    private String getClientId(){
-        
-        return "clientIdss0";
     }
 
     private boolean hasValidSubscription() throws PhoenixException {
@@ -83,10 +79,6 @@ public class Phoenix {
         HttpURLConnection connection = null;
 
         try {
-
-            if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                throw new PhoenixException("Cannot detect the default browser.");
-            }
 
             URL apiUrl = new URL("http://localhost:3000/api/v1/subscriptions/has-subscription");
 
@@ -100,8 +92,7 @@ public class Phoenix {
             // Prepare JSON body
             String jsonInputString = "{"
                     + "\"appSecret\":\"" + this.appSecret + "\","
-                    + "\"clientId\":\"" + getClientId() + "\","
-                    + "\"stripeSecret\":\"" + this.stripeSecret + "\""
+                    + "\"clientId\":\"" + new ClientData().getClientId() + "\""
                     + "}";
 
             // Write JSON data to request body
