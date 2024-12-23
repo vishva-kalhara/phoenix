@@ -1,9 +1,14 @@
 import Logo from "@/components/img/logo";
 import LogoBlack from "@/components/img/logo-black";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+    useEffect(() => {
+        document.title = "Phoenix | Licensing Provider";
+    }, []);
+
     return (
         <>
             <section className="pt-32 pb-6">
@@ -159,7 +164,7 @@ const LandingPage = () => {
                     </p>
                     <div className="mt-8 flex gap-4 justify-center">
                         <Link to="/waitlist">
-                            <Button className="bg-gradient-to-br from-[#C6FCA6] to-[#a7fceeba] text-black font-semibold ">
+                            <Button className="bg-gradient-to-br from-[#C6FCA6] to-[#a7fceeba]">
                                 Join to waitlist
                             </Button>
                         </Link>

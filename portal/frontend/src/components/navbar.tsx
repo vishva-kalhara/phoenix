@@ -5,11 +5,11 @@ import { Button } from "./ui/button";
 const NavBar = () => {
     return (
         <nav className="flex justify-between py-6 px-10 bg-[#152733]">
-            <LogoWithName />
+            <Link to="/">
+                <LogoWithName />
+            </Link>
             <Link to="/waitlist">
-                <Button className="bg-gradient-to-br from-[#C6FCA6] to-[#a7fceeba] text-black font-semibold ">
-                    Join to waitlist
-                </Button>
+                <Button className="bg-[#C6FCA6]">Join to waitlist</Button>
             </Link>
         </nav>
     );
