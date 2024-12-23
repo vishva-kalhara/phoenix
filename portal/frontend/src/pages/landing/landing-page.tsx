@@ -60,10 +60,10 @@ const LandingPage = () => {
                                         <img src="/icons8-java.svg" />
                                     </div>
                                     <div className="p-4 bg-white/5 rounded-lg">
-                                        <img src="icons8-c-sharp-logo.svg" />
+                                        <img src="/icons8-c-sharp-logo.svg" />
                                     </div>
                                     <div className="p-4 bg-white/5 rounded-lg">
-                                        <img src="icons8-javascript.svg" />
+                                        <img src="/icons8-javascript.svg" />
                                     </div>
                                 </div>
                             </div>

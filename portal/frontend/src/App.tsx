@@ -3,7 +3,6 @@ import NavBar from "./components/navbar";
 import LandingPage from "./pages/landing/landing-page";
 import Footer from "./components/footer";
 import MyAppsPage from "./pages/portal/my-apps-page";
-import AppDashboard from "./pages/portal/app/app-dashboard";
 import AppConfig from "./pages/portal/app/app-config";
 import NewAppPage from "./pages/portal/new-app-page";
 import ApplicationLayout from "./pages/portal/app/application-layout";
@@ -12,6 +11,7 @@ import NotFoundPage from "./pages/not-found-page";
 import SubscriptionSuccessPage from "./pages/subscriptions/subscription-success-page";
 import SubscriptionFailPage from "./pages/subscriptions/subscription-fail-page";
 import WaitlistPage from "./pages/waitlist";
+import AppDocs from "./pages/portal/app/app-docs";
 
 function App() {
     return (
@@ -22,7 +22,7 @@ function App() {
                 <Route path="/portal">
                     <Route path="app/:id" element={<ApplicationLayout />}>
                         <Route path="configure" element={<AppConfig />} />
-                        <Route index element={<AppDashboard />} />
+                        <Route index element={<AppDocs />} />
                     </Route>
                     <Route path="new-app" element={<NewAppPage />} />
                     <Route index element={<MyAppsPage />} />

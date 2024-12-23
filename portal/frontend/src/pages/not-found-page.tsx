@@ -3,7 +3,7 @@ const NotFoundPage = () => {
         <section className="py-32 flex justify-center">
             <div className="flex flex-col px-10">
                 <div className="flex justify-center">
-                    <div className="bg-[#C6FCA6]/5 py-2 px-4 text-[#C6FCA6] rounded-lg font-semibold text-sm">
+                    <div className="bg-[#C6FCA6]/5 py-2 px-4 text-[#C6FCA6]/85 rounded-lg font-semibold text-sm">
                         404 Error
                     </div>
                 </div>
