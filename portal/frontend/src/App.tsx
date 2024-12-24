@@ -10,8 +10,9 @@ import SignInPage from "./pages/auth/sign-in-page";
 import NotFoundPage from "./pages/not-found-page";
 import SubscriptionSuccessPage from "./pages/subscriptions/subscription-success-page";
 import SubscriptionFailPage from "./pages/subscriptions/subscription-fail-page";
-import WaitlistPage from "./pages/waitlist";
+import WaitlistPage from "./pages/waitlist/waitlist";
 import AppDocs from "./pages/portal/app/app-docs";
+import WaitlistSuccess from "./pages/waitlist/watilist-success";
 
 function App() {
     return (
@@ -38,7 +39,10 @@ function App() {
                     path="/subscription-fail"
                     element={<SubscriptionFailPage />}
                 />
-                <Route path="/waitlist" element={<WaitlistPage />} />
+                <Route path="/waitlist">
+                    <Route path="success" element={<WaitlistSuccess />} />
+                    <Route index element={<WaitlistPage />} />
+                </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />

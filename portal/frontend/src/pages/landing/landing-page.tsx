@@ -136,7 +136,7 @@ const LandingPage = () => {
                                         "Our system ensures only active subscriptions can run your app.",
                                 },
                             ].map((step, index) => (
-                                <div className="flex gap-4">
+                                <div key={index} className="flex gap-4">
                                     <div className="size-10 shrink-0 flex items-center justify-center bg-white/10 rounded-full">
                                         {index + 1}
                                     </div>

@@ -23,13 +23,13 @@ const NewAppPage = () => {
                             <Label className="text-xs text-white/70">
                                 Subscription is valid for (days) *
                             </Label>
-                            <Input />
+                            <Input type="number" />
                         </div>
                         <div className="flex flex-col gap-1 w-full sm:w-2/5">
                             <Label className="text-xs text-white/70">
                                 Amount (USD) *
                             </Label>
-                            <Input />
+                            <Input type="" />
                         </div>
                     </div>
                     <Button className="w-full mt-2 py-5 bg-[#C6FCA6]">
