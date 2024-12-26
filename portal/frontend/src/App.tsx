@@ -15,6 +15,7 @@ import AppDocs from "./pages/portal/app/app-docs";
 import WaitlistSuccess from "./pages/waitlist/watilist-success";
 import VerifyUserPage from "./pages/auth/verify-user";
 import Protect from "./components/protect";
+import SignOutPage from "./pages/auth/sign-out-page";
 
 function App() {
     return (
@@ -33,6 +34,9 @@ function App() {
                 <Route path="/auth">
                     <Route path="verify-user" element={<VerifyUserPage />} />
                     <Route path="sign-in" element={<SignInPage />} />
+                    <Route path="sign-out" element={<Protect />}>
+                        <Route index element={<SignOutPage />} />
+                    </Route>
                 </Route>
                 <Route
                     path="/subscription-success"

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { removeAccessToken, setAccessToken } from "@/state/slices/auth-slice";
+import { revokeAccessToken, setAccessToken } from "@/state/slices/auth-slice";
 import { AppDispatch, RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ const DemoRedux = () => {
     return (
         <section>
             {token ? (
-                <Button onClick={() => dispatch(removeAccessToken())}>
+                <Button onClick={() => dispatch(revokeAccessToken())}>
                     token: {token} | Sign out
                 </Button>
             ) : (

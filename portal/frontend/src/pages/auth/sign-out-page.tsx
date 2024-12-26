@@ -1,13 +1,10 @@
-import GitHubLogo from "@/components/img/github-logo";
 import { Button } from "@/components/ui/button";
+import { revokeAccessToken } from "@/state/slices/auth-slice";
+import { AppDispatch } from "@/state/store";
+import { useDispatch } from "react-redux";
 
-const SignInPage = () => {
-    const getGitHubLoginUrl = () => {
-        window.location.assign(
-            "https://github.com/login/oauth/authorize?client_id=" +
-                import.meta.env.VITE_GITHUB_CLIENT_ID
-        );
-    };
+const SignOutPage = () => {
+    const dispatch = useDispatch<AppDispatch>();
 
     return (
         <section className="pt-32 px-10 relative">
@@ -22,9 +19,11 @@ const SignInPage = () => {
                 <div className="flex flex-col  mt-10 gap-3">
                     <Button
                         className="w-full py-5 bg-[#fff]/5 text-white hover:bg-white/10"
-                        onClick={getGitHubLoginUrl}
+                        onClick={() => {
+                            dispatch(revokeAccessToken());
+                        }}
                     >
-                        <GitHubLogo /> Sign in with GitHub
+                        Confirm Sign Out
                     </Button>
                 </div>
             </div>
@@ -32,4 +31,4 @@ const SignInPage = () => {
     );
 };
 
-export default SignInPage;
+export default SignOutPage;
