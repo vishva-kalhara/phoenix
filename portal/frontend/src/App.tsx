@@ -13,6 +13,8 @@ import SubscriptionFailPage from "./pages/subscriptions/subscription-fail-page";
 import WaitlistPage from "./pages/waitlist/waitlist";
 import AppDocs from "./pages/portal/app/app-docs";
 import WaitlistSuccess from "./pages/waitlist/watilist-success";
+import VerifyUserPage from "./pages/auth/verify-user";
+import Protect from "./components/protect";
 
 function App() {
     return (
@@ -20,7 +22,7 @@ function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/portal">
+                <Route path="/portal" element={<Protect />}>
                     <Route path="app/:id" element={<ApplicationLayout />}>
                         <Route path="configure" element={<AppConfig />} />
                         <Route index element={<AppDocs />} />
@@ -28,7 +30,8 @@ function App() {
                     <Route path="new-app" element={<NewAppPage />} />
                     <Route index element={<MyAppsPage />} />
                 </Route>
-                <Route path="auth">
+                <Route path="/auth">
+                    <Route path="verify-user" element={<VerifyUserPage />} />
                     <Route path="sign-in" element={<SignInPage />} />
                 </Route>
                 <Route

@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { syncUserWithDB } from "../controllers/user-controller";
+import { getAccessToken, syncUserWithDB } from "../controllers/user-controller";
 
 const router = Router();
 
-router.post("/sync-user-with-db", syncUserWithDB);
+router.get("/get-access-token", getAccessToken);
+// .post("/sync-user-with-db", syncUserWithDB)
 
 export default router;

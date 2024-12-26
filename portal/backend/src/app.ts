@@ -7,9 +7,12 @@ import subscriptionRouter from "./routers/subscription-router";
 import paymentRouter from "./routers/payment-router";
 import tokenRouter from "./routers/tokens-router";
 import morgan from "morgan";
+import cors from "cors";
 
 export const createApp = () => {
     const app = express();
+
+    app.use(cors());
 
     app.use(express.json({ limit: "10kb" }));
 

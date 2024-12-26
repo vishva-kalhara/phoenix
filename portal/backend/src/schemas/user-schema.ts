@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IUserDoc } from "../types/user-types";
+import { v4 as uuidv4 } from "uuid";
 
 const userSchema = new Schema<IUserDoc>({
     email: {
@@ -8,11 +9,11 @@ const userSchema = new Schema<IUserDoc>({
     },
     apiKey: {
         type: String,
-        required: true,
+        default: uuidv4(),
     },
     isActive: {
         type: Boolean,
-        required: true,
+        default: true,
     },
     externalId: {
         type: String,
