@@ -58,6 +58,28 @@ export const createApp = async (
     }
 };
 
+export const getMyApps = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const apps = await applicationSchema.find({
+            user: req.body.user._id,
+            isActive: true,
+        });
+
+        res.status(200).json({
+            status: "success",
+            count: apps.length,
+            apps,
+        });
+    } catch (error) {
+        console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
+};
+
 export const getApp = (req: Request, res: Response, next: NextFunction) => {
     res.status(200).send("Application fetched successfully");
 };

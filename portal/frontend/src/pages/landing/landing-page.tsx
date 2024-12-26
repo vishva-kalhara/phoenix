@@ -1,10 +1,14 @@
 import Logo from "@/components/img/logo";
 import LogoBlack from "@/components/img/logo-black";
 import { Button } from "@/components/ui/button";
+import { RootState } from "@/state/store";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+    const token = useSelector((state: RootState) => state.auth.accessToken);
+
     useEffect(() => {
         document.title = "Phoenix | Licensing Provider";
     }, []);
@@ -33,9 +37,10 @@ const LandingPage = () => {
                                         Documentation
                                     </Button>
                                 </Link>
-                                <Link to="/waitlist">
+
+                                <Link to="/portal">
                                     <Button className="bg-gradient-to-br from-[#C6FCA6] to-[#a7fceeba] text-black font-semibold ">
-                                        Join to waitlist
+                                        {token ? "Go to Portal" : "Get Started"}
                                     </Button>
                                 </Link>
                             </div>

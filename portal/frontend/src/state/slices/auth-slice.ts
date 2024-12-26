@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface authState {
+interface IAuthState {
     accessToken: string | null;
 }
 
-const initialState: authState = {
+const initialState: IAuthState = {
     accessToken: null,
 };
 

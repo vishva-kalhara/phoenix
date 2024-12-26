@@ -15,7 +15,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         const data = await response.json();
 
         if (data.status == 401)
-            return res.status(401).redirect("/auth/sign-in");
+            return res
+                .status(401)
+                .redirect(`${process.env.FRONTEND_URL}/auth/sign-in`);
 
         const user = await userSchema.findOne({ externalId: data.id });
         if (!user) createUser(data.id, data.email);

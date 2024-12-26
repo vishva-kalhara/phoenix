@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+import LoadingSpinner from "@/components/loading-spinner";
 import { useToast } from "@/hooks/use-toast";
+import { getAccessToken } from "@/services/auth-service";
 import { setAccessToken } from "@/state/slices/auth-slice";
 import { AppDispatch, RootState } from "@/state/store";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,19 +19,11 @@ const VerifyUserPage = () => {
     useEffect(() => {
         const code = new URLSearchParams(window.location.search).get("code");
         // dispatch('data.data.access_token');
-        console.log("access: ", token ? true : false);
 
         if (code && !token) {
-            console.log("access: ", token ? true : false);
             const fetchAccessToken = async () => {
                 try {
-                    // // const data = await getAccessToken(code);
-                    const data = await axios.get(
-                        `${
-                            import.meta.env.VITE_API_URL
-                        }/api/v1/users/get-access-token?code=${code}`
-                    );
-                    console.log(data);
+                    const data = await getAccessToken(code);
                     if (!token && data.data.access_token) {
                         dispatch(setAccessToken(data.data.access_token));
                         navigate("/portal");
@@ -53,8 +46,8 @@ const VerifyUserPage = () => {
     }, [dispatch, navigate, toast, token]);
 
     return (
-        <section>
-            <Button> Verifying...</Button>
+        <section className="min-h-[50dvh]">
+            <LoadingSpinner />
         </section>
     );
 };
