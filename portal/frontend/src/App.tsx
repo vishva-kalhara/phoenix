@@ -4,7 +4,7 @@ import LandingPage from "./pages/landing/landing-page";
 import Footer from "./components/footer";
 import MyAppsPage from "./pages/portal/my-apps-page";
 import AppConfig from "./pages/portal/app/app-config";
-import NewAppPage from "./pages/portal/new-app-page";
+import NewAppPage from "./pages/portal/app/new-app-page";
 import ApplicationLayout from "./pages/portal/app/application-layout";
 import SignInPage from "./pages/auth/sign-in-page";
 import NotFoundPage from "./pages/not-found-page";

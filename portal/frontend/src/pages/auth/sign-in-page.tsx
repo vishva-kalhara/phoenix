@@ -1,7 +1,12 @@
 import GitHubLogo from "@/components/img/github-logo";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 const SignInPage = () => {
+    useEffect(() => {
+        document.title = "Phoenix | Licensing Provider";
+    }, []);
+
     const getGitHubLoginUrl = () => {
         window.location.assign(
             "https://github.com/login/oauth/authorize?client_id=" +

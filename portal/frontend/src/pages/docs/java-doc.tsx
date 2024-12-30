@@ -13,7 +13,10 @@ export const javaDocData: StepItemDataProps[] = [
                 "Download the following .jar file and import it to your project.",
             markup: (
                 <div className="mt-2 ms-14">
-                    <Link to="/sdk/java">
+                    <Link
+                        to="/sdk/java"
+                        download="https://drive.google.com/file/d/1YgiE5__8114yk-MtKSy6urSjB7Zs_I6Y/view?usp=drive_link"
+                    >
                         <Button className="bg-white/5 text-white">
                             Download SDK <ArrowUpRight className="size-3" />
                         </Button>

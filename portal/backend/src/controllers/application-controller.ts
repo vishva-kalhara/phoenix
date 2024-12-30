@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import userSchema from "../schemas/user-schema";
 import AppError from "../utils/AppError";
 import { v4 as uuidv4 } from "uuid";
 import applicationSchema from "../schemas/application-schema";
@@ -10,9 +9,6 @@ export const createApp = async (
     next: NextFunction
 ) => {
     try {
-        // TODO: Get the user from the request
-        const externalId = "req.body.externalId";
-
         if (!req.body.name) {
             return next(new AppError("Application name is required", 400));
         }
@@ -32,15 +28,8 @@ export const createApp = async (
             }
         }
 
-        const loggedUser = await userSchema
-            .findOne({ externalId: externalId })
-            .select("_id");
-        if (!loggedUser) {
-            return next(new AppError("User not found", 404));
-        }
-
         const app = await applicationSchema.create({
-            user: loggedUser._id,
+            user: req.body.user._id,
             name: req.body.name,
             appSecret: uuidv4(),
             plans: req.body.plans,

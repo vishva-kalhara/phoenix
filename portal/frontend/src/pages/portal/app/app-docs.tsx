@@ -51,7 +51,11 @@ const AppDocs = () => {
                 <div className="w-full flex flex-col gap-16 mt-14">
                     {language == "java" ? (
                         javaDocData.map((document, index) => (
-                            <StepItem index={index} step={document.step} />
+                            <StepItem
+                                key={index}
+                                index={index}
+                                step={document.step}
+                            />
                         ))
                     ) : (
                         <UnderConstructionDOc />

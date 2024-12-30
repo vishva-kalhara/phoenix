@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const VerifyUserPage = () => {
+    useEffect(() => {
+        document.title = "Phoenix | Licensing Provider";
+    }, []);
+
     const token = useSelector((state: RootState) => state.auth.accessToken);
     const dispatch = useDispatch<AppDispatch>();
 
