@@ -69,8 +69,24 @@ export const getMyApps = async (
     }
 };
 
-export const getApp = (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).send("Application fetched successfully");
+export const getApp = async (
+    req: Request,
+    res: Response,
+
+    next: NextFunction
+) => {
+    try {
+        const app = await applicationSchema.findOne({ _id: req.params.id });
+        if (!app) return next(new AppError("App not found!", 404));
+
+        res.status(200).json({
+            status: "success",
+            app,
+        });
+    } catch (error) {
+        console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
 };
 
 export const updateApp = (req: Request, res: Response, next: NextFunction) => {

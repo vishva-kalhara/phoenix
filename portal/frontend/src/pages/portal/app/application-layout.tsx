@@ -1,9 +1,50 @@
 import { Button } from "@/components/ui/button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Settings2 } from "lucide-react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/state/store";
+import { getApp } from "@/services/application-service";
+import { setCurrentApp, setIsFetching } from "@/state/slices/apps-slice";
+import { AxiosError } from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 const ApplicationLayout = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    const app = useSelector((state: RootState) => state.apps.currentApp);
+    const token = useSelector((state: RootState) => state.auth.accessToken);
+    const dispatch = useDispatch<AppDispatch>();
+
+    const { toast } = useToast();
+
+    useEffect(() => {
+        document.title = "Phoenix " + app?.name && ` | ${app?.name}`;
+    }, [app]);
+
+    useEffect(() => {
+        const fetchApp = async () => {
+            try {
+                dispatch(setIsFetching(true));
+                const data = await getApp(id || "", token || "");
+                dispatch(setCurrentApp(data.data.app));
+            } catch (error: AxiosError | unknown) {
+                const axiosError = error as AxiosError<{ message: string }>;
+                toast({
+                    variant: "destructive",
+                    description:
+                        axiosError.response?.data?.message ||
+                        "An error occurred",
+                });
+                navigate("/not-found");
+            } finally {
+                setIsFetching(false);
+            }
+        };
+
+        fetchApp();
+    }, [navigate, toast, token, id, dispatch]);
 
     return (
         <section>
@@ -19,7 +60,7 @@ const ApplicationLayout = () => {
                             <ArrowLeft />
                         </Button>
                         <h3 className="text-normal md:text-lg  font-semibold leading-relaxed">
-                            School Sync
+                            {app?.name}
                         </h3>
                     </div>
                     <Link to="configure">

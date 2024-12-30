@@ -1,6 +1,6 @@
 import { StepItemDataProps } from "@/components/step-item";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+import { Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Prism as SyntaxHighLighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -14,11 +14,11 @@ export const javaDocData: StepItemDataProps[] = [
             markup: (
                 <div className="mt-2 ms-14">
                     <Link
-                        to="/sdk/java"
-                        download="https://drive.google.com/file/d/1YgiE5__8114yk-MtKSy6urSjB7Zs_I6Y/view?usp=drive_link"
+                        to="https://drive.google.com/uc?export=download&id=1YgiE5__8114yk-MtKSy6urSjB7Zs_I6Y
+"
                     >
                         <Button className="bg-white/5 text-white">
-                            Download SDK <ArrowUpRight className="size-3" />
+                            Download SDK <Download className="size-3" />
                         </Button>
                     </Link>
                 </div>

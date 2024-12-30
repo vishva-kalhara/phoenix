@@ -41,3 +41,14 @@ export const createApp = ({
         }
     );
 };
+
+export const getApp = (id: string, token: string) => {
+    return axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/applications/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+};

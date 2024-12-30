@@ -1,11 +1,14 @@
+import AppCard from "@/components/app-card";
 import LoadingSpinner from "@/components/loading-spinner";
 import { useToast } from "@/hooks/use-toast";
 import { getMyApps } from "@/services/application-service";
-import { RootState } from "@/state/store";
+import { setMyApps } from "@/state/slices/apps-slice";
+import { AppDispatch, RootState } from "@/state/store";
+import { IApplication } from "@/types/application-types";
 import { AxiosError } from "axios";
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const MyAppsPage = () => {
@@ -14,11 +17,14 @@ const MyAppsPage = () => {
     const { toast } = useToast();
 
     const token = useSelector((state: RootState) => state.auth.accessToken);
+    const dispatch = useDispatch<AppDispatch>();
+    const apps = useSelector((state: RootState) => state.apps.apps);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await getMyApps(token || "");
+                const data = await getMyApps(token || "");
+                dispatch(setMyApps(data.data.apps));
             } catch (error: AxiosError | unknown) {
                 const axiosError = error as AxiosError<{ message: string }>;
                 toast({
@@ -32,7 +38,7 @@ const MyAppsPage = () => {
             }
         };
         fetchData();
-    }, [token, toast]);
+    }, [token, toast, dispatch]);
 
     return (
         <section className="pt-16 px-6 relative min-h-[60dvh]">
@@ -45,6 +51,9 @@ const MyAppsPage = () => {
                             <Plus className="" /> Create new App
                         </div>
                     </Link>
+                    {apps.map((app: IApplication, index) => (
+                        <AppCard app={app} key={index} />
+                    ))}
                 </div>
             )}
         </section>
