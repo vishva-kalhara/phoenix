@@ -3,6 +3,7 @@ import LogoWithName from "./img/logo-w-name";
 import { Button } from "./ui/button";
 import { RootState } from "@/state/store";
 import { useSelector } from "react-redux";
+import APIKeyModel from "./api-key-modal";
 
 const NavBar = () => {
     const token = useSelector((state: RootState) => state.auth.accessToken);
@@ -13,9 +14,13 @@ const NavBar = () => {
                 <LogoWithName />
             </Link>
             {token ? (
-                <Link to="/auth/sign-out">
-                    <Button className="bg-[#C6FCA6]">Sign out</Button>
-                </Link>
+                <div className="flex gap-2">
+                    <APIKeyModel />
+
+                    <Link to="/auth/sign-out">
+                        <Button className="bg-[#C6FCA6]">Sign out</Button>
+                    </Link>
+                </div>
             ) : (
                 <Link to="/portal">
                     <Button className="bg-[#C6FCA6]">Get Started Now</Button>

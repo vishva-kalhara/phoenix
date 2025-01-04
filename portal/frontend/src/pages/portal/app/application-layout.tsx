@@ -8,26 +8,26 @@ import { getApp } from "@/services/application-service";
 import { setCurrentApp, setIsFetching } from "@/state/slices/apps-slice";
 import { AxiosError } from "axios";
 import { useToast } from "@/hooks/use-toast";
+import LoadingSpinner from "@/components/loading-spinner";
 
 const ApplicationLayout = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const app = useSelector((state: RootState) => state.apps.currentApp);
-    const token = useSelector((state: RootState) => state.auth.accessToken);
+    const { apps, auth } = useSelector((state: RootState) => state);
     const dispatch = useDispatch<AppDispatch>();
 
     const { toast } = useToast();
 
     useEffect(() => {
-        document.title = "Phoenix " + app?.name && ` | ${app?.name}`;
-    }, [app]);
+        document.title = `Phoenix | ${apps.currentApp?.name}`;
+    }, [apps]);
 
     useEffect(() => {
         const fetchApp = async () => {
             try {
                 dispatch(setIsFetching(true));
-                const data = await getApp(id || "", token || "");
+                const data = await getApp(id || "", auth.accessToken || "");
                 dispatch(setCurrentApp(data.data.app));
             } catch (error: AxiosError | unknown) {
                 const axiosError = error as AxiosError<{ message: string }>;
@@ -39,12 +39,12 @@ const ApplicationLayout = () => {
                 });
                 navigate("/not-found");
             } finally {
-                setIsFetching(false);
+                dispatch(setIsFetching(false));
             }
         };
 
         fetchApp();
-    }, [navigate, toast, token, id, dispatch]);
+    }, [navigate, toast, id, dispatch, auth.accessToken]);
 
     return (
         <section>
@@ -60,7 +60,7 @@ const ApplicationLayout = () => {
                             <ArrowLeft />
                         </Button>
                         <h3 className="text-normal md:text-lg  font-semibold leading-relaxed">
-                            {app?.name}
+                            {apps.currentApp?.name}
                         </h3>
                     </div>
                     <Link to="configure">
@@ -74,7 +74,7 @@ const ApplicationLayout = () => {
                     </Link>
                 </div>
             </div>
-            <Outlet />
+            {apps.isFetching ? <LoadingSpinner /> : <Outlet />}
         </section>
     );
 };
