@@ -1,15 +1,26 @@
 import { IApplication } from "@/types/application-types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface IAppStats {
+    monthlyEarnings: number;
+    uniqueUsers: number;
+    chartData: {
+        _id: string;
+        value: number;
+    }[];
+}
+
 interface IAppsState {
     apps: IApplication[];
     currentApp: IApplication | null;
     isFetching: boolean;
+    currentAppStats: IAppStats | null;
 }
 
 const initialState: IAppsState = {
     apps: [],
     currentApp: null,
+    currentAppStats: null,
     isFetching: false,
 };
 
@@ -29,10 +40,18 @@ const appsSlice = createSlice({
         setIsFetching: (state, action: PayloadAction<boolean>) => {
             state.isFetching = action.payload;
         },
+        setCurrentAppStats: (state, action: PayloadAction<IAppStats>) => {
+            state.currentAppStats = action.payload;
+        },
     },
 });
 
-export const { setMyApps, setCurrentApp, setIsFetching, removeCurrentApp } =
-    appsSlice.actions;
+export const {
+    setMyApps,
+    setCurrentApp,
+    setIsFetching,
+    removeCurrentApp,
+    setCurrentAppStats,
+} = appsSlice.actions;
 
 export default appsSlice.reducer;

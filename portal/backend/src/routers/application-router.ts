@@ -3,6 +3,7 @@ import {
     createApp,
     deleteApp,
     getApp,
+    getAppStats,
     getMyApps,
     regenerateAppSecret,
 } from "../controllers/application-controller";
@@ -18,5 +19,6 @@ router.get("/my-apps", getMyApps);
 
 router.route("/:id").get(getApp).delete(deleteApp);
 router.patch("/:id/new-app-secret", regenerateAppSecret);
+router.get("/:id/stats", getAppStats);
 
 export default router;

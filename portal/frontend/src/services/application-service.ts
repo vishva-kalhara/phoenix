@@ -77,3 +77,14 @@ export const regenerateAppSecret = (id: string, token: string) => {
         }
     );
 };
+
+export const getStats = (id: string, token: string) => {
+    return axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/applications/${id}/stats`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+};

@@ -11,11 +11,11 @@ import NotFoundPage from "./pages/not-found-page";
 import SubscriptionSuccessPage from "./pages/subscriptions/subscription-success-page";
 import SubscriptionFailPage from "./pages/subscriptions/subscription-fail-page";
 import WaitlistPage from "./pages/waitlist/waitlist";
-import AppDocs from "./pages/portal/app/app-docs";
 import WaitlistSuccess from "./pages/waitlist/watilist-success";
 import VerifyUserPage from "./pages/auth/verify-user";
 import Protect from "./components/protect";
 import SignOutPage from "./pages/auth/sign-out-page";
+import AppDashboard from "./pages/portal/app/app-dashboard";
 
 function App() {
     return (
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/portal" element={<Protect />}>
                     <Route path="app/:id" element={<ApplicationLayout />}>
                         <Route path="configure" element={<AppConfig />} />
-                        <Route index element={<AppDocs />} />
+                        <Route index element={<AppDashboard />} />
                     </Route>
                     <Route path="new-app" element={<NewAppPage />} />
                     <Route index element={<MyAppsPage />} />

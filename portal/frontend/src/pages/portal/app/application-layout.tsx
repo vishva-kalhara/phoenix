@@ -4,8 +4,12 @@ import { ArrowLeft, Settings2 } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/state/store";
-import { getApp } from "@/services/application-service";
-import { setCurrentApp, setIsFetching } from "@/state/slices/apps-slice";
+import { getApp, getStats } from "@/services/application-service";
+import {
+    setCurrentApp,
+    setCurrentAppStats,
+    setIsFetching,
+} from "@/state/slices/apps-slice";
 import { AxiosError } from "axios";
 import { useToast } from "@/hooks/use-toast";
 import LoadingSpinner from "@/components/loading-spinner";
@@ -27,8 +31,12 @@ const ApplicationLayout = () => {
         const fetchApp = async () => {
             try {
                 dispatch(setIsFetching(true));
-                const data = await getApp(id || "", auth.accessToken || "");
+                const [data, stats] = await Promise.all([
+                    getApp(id || "", auth.accessToken || ""),
+                    getStats(id || "", auth.accessToken || ""),
+                ]);
                 dispatch(setCurrentApp(data.data.app));
+                dispatch(setCurrentAppStats(stats.data.stats));
             } catch (error: AxiosError | unknown) {
                 const axiosError = error as AxiosError<{ message: string }>;
                 toast({

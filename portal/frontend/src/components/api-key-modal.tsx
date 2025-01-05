@@ -44,7 +44,6 @@ const APIKeyModel = () => {
     const regenerateKey = async () => {
         try {
             const data = await regenerateAPIKey(state.auth.accessToken || "");
-            console.log(data);
             navigator.clipboard.writeText(data.data.user.apiKey);
             toast({
                 title: "Copied to clipboard",
