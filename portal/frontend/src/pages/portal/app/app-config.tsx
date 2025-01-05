@@ -1,8 +1,8 @@
 import ConfirmDialog from "@/components/confirm-dialog";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { deleteApp } from "@/services/application-service";
-import { removeCurrentApp } from "@/state/slices/apps-slice";
+import { deleteApp, regenerateAppSecret } from "@/services/application-service";
+import { removeCurrentApp, setCurrentApp } from "@/state/slices/apps-slice";
 import { AppDispatch, RootState } from "@/state/store";
 import { AxiosError } from "axios";
 import { Clipboard } from "lucide-react";
@@ -25,13 +25,34 @@ const AppConfig = () => {
 
     const confirmDelete = async () => {
         try {
-            const data = await deleteApp(
+            await deleteApp(
                 state.apps.currentApp?._id || "",
                 state.auth.accessToken || ""
             );
-            console.log(data);
             dispatch(removeCurrentApp());
             navigate("/portal", { replace: true });
+        } catch (error: AxiosError | unknown) {
+            const axiosError = error as AxiosError<{ message: string }>;
+            toast({
+                variant: "destructive",
+                description:
+                    axiosError.response?.data?.message || "An error occurred",
+            });
+        }
+    };
+
+    const regenerateSecret = async () => {
+        try {
+            const data = await regenerateAppSecret(
+                state.apps.currentApp?._id || "",
+                state.auth.accessToken || ""
+            );
+            navigator.clipboard.writeText(data.data.app.appSecret || "");
+            dispatch(setCurrentApp(data.data.app));
+            toast({
+                title: "Copied to clipboard",
+                variant: "success",
+            });
         } catch (error: AxiosError | unknown) {
             const axiosError = error as AxiosError<{ message: string }>;
             toast({
@@ -57,7 +78,7 @@ const AppConfig = () => {
                         <Clipboard color="black" /> Copy to clipboard
                     </Button>
                     <ConfirmDialog
-                        onActionPerformed={confirmDelete}
+                        onActionPerformed={regenerateSecret}
                         trigger="Regenerate"
                         description="Application's unique Secret Key for authenticating API
                     requests and managing waitlist data securely."

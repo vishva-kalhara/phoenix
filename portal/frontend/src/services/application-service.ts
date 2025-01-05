@@ -54,9 +54,22 @@ export const getApp = (id: string, token: string) => {
 };
 
 export const deleteApp = (id: string, token: string) => {
-    console.log(id, token);
     return axios.delete(
         `${import.meta.env.VITE_API_URL}/api/v1/applications/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+};
+
+export const regenerateAppSecret = (id: string, token: string) => {
+    return axios.patch(
+        `${
+            import.meta.env.VITE_API_URL
+        }/api/v1/applications/${id}/new-app-secret`,
+        {},
         {
             headers: {
                 Authorization: `Bearer ${token}`,

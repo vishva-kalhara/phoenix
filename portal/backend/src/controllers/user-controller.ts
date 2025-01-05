@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import uuid from "uuid";
 import AppError from "../utils/AppError";
 import userSchema from "../schemas/user-schema";
+import { v4 as uuidv4 } from "uuid";
 
 export const syncUserWithDB = async (externalId: string) => {
     try {
@@ -26,7 +27,7 @@ export const syncUserWithDB = async (externalId: string) => {
 
 export const createUser = async (externalId: string, email: string) => {
     try {
-        await userSchema.create({
+        return await userSchema.create({
             email,
             externalId,
         });
@@ -55,6 +56,42 @@ export const getAccessToken = async (
         const data = await response.json();
 
         res.status(200).json(data);
+    } catch (error) {
+        // console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
+};
+
+export const getMe = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        res.status(200).json({
+            status: "Success",
+            user: req.body.user,
+        });
+    } catch (error) {
+        // console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
+};
+
+export const regenerateAPIKey = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const user = await userSchema.findByIdAndUpdate(req.body.user._id, {
+            apiKey: uuidv4(),
+        });
+
+        res.status(200).json({
+            status: "Success",
+            user: user,
+        });
     } catch (error) {
         // console.error(error);
         next(new AppError("Unknown Error Occured!", 500));

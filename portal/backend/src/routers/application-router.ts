@@ -4,7 +4,7 @@ import {
     deleteApp,
     getApp,
     getMyApps,
-    updateApp,
+    regenerateAppSecret,
 } from "../controllers/application-controller";
 import protect from "../middlewares/protect";
 
@@ -16,6 +16,7 @@ router.route("/").post(createApp);
 
 router.get("/my-apps", getMyApps);
 
-router.route("/:id").get(getApp).patch(updateApp).delete(deleteApp);
+router.route("/:id").get(getApp).delete(deleteApp);
+router.patch("/:id/new-app-secret", regenerateAppSecret);
 
 export default router;

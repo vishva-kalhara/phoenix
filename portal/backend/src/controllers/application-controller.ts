@@ -72,7 +72,6 @@ export const getMyApps = async (
 export const getApp = async (
     req: Request,
     res: Response,
-
     next: NextFunction
 ) => {
     try {
@@ -89,8 +88,25 @@ export const getApp = async (
     }
 };
 
-export const updateApp = (req: Request, res: Response, next: NextFunction) => {
-    res.status(400).json({ message: "Endpoint is under construction." });
+export const regenerateAppSecret = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const app = await applicationSchema.findByIdAndUpdate(req.params.id, {
+            appSecret: uuidv4(),
+        });
+        if (!app) return next(new AppError("App not found!", 404));
+
+        res.status(200).json({
+            status: "success",
+            app,
+        });
+    } catch (error) {
+        console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
 };
 
 export const deleteApp = async (

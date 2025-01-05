@@ -9,27 +9,46 @@ import { Clipboard, KeySquare } from "lucide-react";
 import ConfirmDialog from "./confirm-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { AxiosError } from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/state/store";
-import { getUserApiKey } from "@/services/user-service";
-import { setUser } from "@/state/slices/user-slice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { getUserApiKey, regenerateAPIKey } from "@/services/user-service";
+import { useState } from "react";
 
 const APIKeyModel = () => {
     const { toast } = useToast();
 
     const state = useSelector((state: RootState) => state);
-    const dispatch = useDispatch<AppDispatch>();
+    const [isProcessing, setIsProcessing] = useState(false);
 
-    const fetchAPIKey = async () => {
+    const copyAPIKey = async () => {
         try {
-            await getUserApiKey(state.auth.accessToken || "");
-            dispatch(
-                setUser({
-                    apiKey: "data.data.user.apiKey",
-                })
-            );
-            await new Promise((resolve) => {
-                setTimeout(resolve, 1000);
+            setIsProcessing(true);
+            const data = await getUserApiKey(state.auth.accessToken || "");
+            navigator.clipboard.writeText(data.data.user.apiKey);
+            toast({
+                title: "Copied to clipboard",
+                variant: "success",
+            });
+        } catch (error: AxiosError | unknown) {
+            const axiosError = error as AxiosError<{ message: string }>;
+            toast({
+                variant: "destructive",
+                description:
+                    axiosError.response?.data?.message || "An error occurred",
+            });
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const regenerateKey = async () => {
+        try {
+            const data = await regenerateAPIKey(state.auth.accessToken || "");
+            console.log(data);
+            navigator.clipboard.writeText(data.data.user.apiKey);
+            toast({
+                title: "Copied to clipboard",
+                variant: "success",
             });
         } catch (error: AxiosError | unknown) {
             const axiosError = error as AxiosError<{ message: string }>;
@@ -39,14 +58,6 @@ const APIKeyModel = () => {
                     axiosError.response?.data?.message || "An error occurred",
             });
         }
-    };
-
-    const regenerateKey = async () => {
-        await fetchAPIKey();
-        // if (!state .user.apiKey) await fetchAPIKey();
-        // else {
-
-        // }
     };
 
     return (
@@ -67,15 +78,27 @@ const APIKeyModel = () => {
                         ensure the security of your data and resources.
                     </p>
                     <div className="flex gap-2 mt-6">
-                        <Button>
-                            <Clipboard color="black" /> Copy to clipboard
+                        <Button
+                            onClick={copyAPIKey}
+                            className="w-44"
+                            disabled={isProcessing}
+                        >
+                            {isProcessing ? (
+                                "Copying..."
+                            ) : (
+                                <>
+                                    <Clipboard color="black" /> Copy to
+                                    clipboard
+                                </>
+                            )}
                         </Button>
                         <ConfirmDialog
                             onActionPerformed={regenerateKey}
                             trigger="Regenerate"
-                            description="Application's unique Secret Key for authenticating API
-                    requests and managing waitlist data securely."
-                            title="Regenerate App Secret Key?"
+                            description="If you regenerate this token, you must replace the
+                    Authorization headers in all your applications to ensure
+                    uninterrupted access."
+                            title="Regenerate User API Key?"
                         />
                     </div>
                 </div>

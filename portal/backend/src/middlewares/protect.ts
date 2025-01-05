@@ -5,6 +5,8 @@ import { createUser } from "../controllers/user-controller";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(req.get("Authorization"));
+
         const response = await fetch("https://api.github.com/user", {
             method: "GET",
             headers: {
