@@ -1,26 +1,45 @@
 import ConfirmDialog from "@/components/confirm-dialog";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { RootState } from "@/state/store";
+import { deleteApp } from "@/services/application-service";
+import { removeCurrentApp } from "@/state/slices/apps-slice";
+import { AppDispatch, RootState } from "@/state/store";
+import { AxiosError } from "axios";
 import { Clipboard } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AppConfig = () => {
-    const appSecret = useSelector(
-        (state: RootState) => state.apps.currentApp?.appSecret
-    );
+    const state = useSelector((state: RootState) => state);
+    const dispatch = useDispatch<AppDispatch>();
     const { toast } = useToast();
+    const navigate = useNavigate();
 
     const copyAppSecret = () => {
-        navigator.clipboard.writeText(appSecret || "");
+        navigator.clipboard.writeText(state.apps.currentApp?.appSecret || "");
         toast({
             title: "Copied to clipboard",
             variant: "success",
         });
     };
 
-    const deleteApp = () => {
-        console.log("gg");
+    const confirmDelete = async () => {
+        try {
+            const data = await deleteApp(
+                state.apps.currentApp?._id || "",
+                state.auth.accessToken || ""
+            );
+            console.log(data);
+            dispatch(removeCurrentApp());
+            navigate("/portal", { replace: true });
+        } catch (error: AxiosError | unknown) {
+            const axiosError = error as AxiosError<{ message: string }>;
+            toast({
+                variant: "destructive",
+                description:
+                    axiosError.response?.data?.message || "An error occurred",
+            });
+        }
     };
 
     return (
@@ -38,7 +57,7 @@ const AppConfig = () => {
                         <Clipboard color="black" /> Copy to clipboard
                     </Button>
                     <ConfirmDialog
-                        onActionPerformed={deleteApp}
+                        onActionPerformed={confirmDelete}
                         trigger="Regenerate"
                         description="Application's unique Secret Key for authenticating API
                     requests and managing waitlist data securely."
@@ -56,7 +75,9 @@ const AppConfig = () => {
                 </p>
                 <div className="flex gap-2 mt-6">
                     <ConfirmDialog
-                        onActionPerformed={deleteApp}
+                        onActionPerformed={() => {
+                            confirmDelete();
+                        }}
                         trigger="Delete App"
                         description="This action cannot be undone. This will permanently
                             delete your account and remove your data from our

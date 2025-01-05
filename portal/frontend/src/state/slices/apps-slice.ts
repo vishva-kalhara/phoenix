@@ -23,12 +23,16 @@ const appsSlice = createSlice({
         setCurrentApp: (state, action: PayloadAction<IApplication>) => {
             state.currentApp = action.payload;
         },
+        removeCurrentApp: (state) => {
+            state.currentApp = null;
+        },
         setIsFetching: (state, action: PayloadAction<boolean>) => {
             state.isFetching = action.payload;
         },
     },
 });
 
-export const { setMyApps, setCurrentApp, setIsFetching } = appsSlice.actions;
+export const { setMyApps, setCurrentApp, setIsFetching, removeCurrentApp } =
+    appsSlice.actions;
 
 export default appsSlice.reducer;

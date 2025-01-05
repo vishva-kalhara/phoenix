@@ -90,9 +90,23 @@ export const getApp = async (
 };
 
 export const updateApp = (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).send("Application updated successfully");
+    res.status(400).json({ message: "Endpoint is under construction." });
 };
 
-export const deleteApp = (req: Request, res: Response, next: NextFunction) => {
-    res.status(204).send("Application delete successfully");
+export const deleteApp = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const app = await applicationSchema.findByIdAndDelete(req.params.id);
+        if (!app) return next(new AppError("App not found!", 404));
+
+        res.status(204).json({
+            status: "success",
+        });
+    } catch (error) {
+        console.error(error);
+        next(new AppError("Unknown Error Occured!", 500));
+    }
 };
