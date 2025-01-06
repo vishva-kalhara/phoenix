@@ -5,6 +5,7 @@
 package com.wishva.phoenix;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.wishva.phoenix.config.Env;
 import com.wishva.phoenix.utils.ClientData;
 import com.wishva.phoenix.utils.PhoenixException;
 import com.wishva.phoenix.utils.PhoenixNoSubscriptionException;
@@ -80,7 +81,7 @@ public class Phoenix {
 
         try {
 
-            URL apiUrl = new URL("http://localhost:3000/api/v1/subscriptions/has-subscription");
+            URL apiUrl = new URL(Env.API_URL +  "/subscriptions/has-subscription");
 
             connection = (HttpURLConnection) apiUrl.openConnection();
 

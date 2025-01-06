@@ -5,6 +5,7 @@
 package com.wishva.phoenix.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.wishva.phoenix.config.Env;
 import com.wishva.phoenix.utils.ClientData;
 import com.wishva.phoenix.utils.PhoenixException;
 import java.awt.Color;
@@ -170,7 +171,7 @@ public class FrmNoSubscription extends javax.swing.JFrame {
                 throw new PhoenixException("Cannot detect the default browser.");
             }
 
-            URL apiUrl = new URL("http://localhost:3000/api/v1/payments/create-checkout-link");
+            URL apiUrl = new URL(Env.API_URL + "/payments/create-checkout-link");
 
             connection = (HttpURLConnection) apiUrl.openConnection();
 
