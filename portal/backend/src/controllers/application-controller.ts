@@ -219,7 +219,7 @@ export const getAppStats = async (
             status: "Success",
             stats: {
                 monthlyEarnings,
-                uniqueUsers: uniqueUsers[0].total,
+                uniqueUsers: uniqueUsers[0]?.total || 0,
                 chartData,
             },
         });
