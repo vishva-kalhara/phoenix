@@ -4,7 +4,7 @@ info:
     description: API documentation for the Phoenix project
     version: 1.0.0
 servers:
-    - url: http://localhost:3000/api/v1
+    - url: https://phoenix-by-wishva-f9071d88ccd0.herokuapp.com/
 paths:
     /applications:
         post:

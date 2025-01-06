@@ -6,9 +6,9 @@ A cross-platform licensing and subscription management SDK for Java, C#, and Ele
 
 Secure your software with real-time license validation, Stripe integration for payments, and an intuitive dashboard to manage licenses and subscriptions. Built with security-first APIs and scalable licensing models, Phoenix simplifies software protection and monetization.
 
--   [Try Now on URL](frontend)
+-   [Try Now on URL](<[frontend](https://phoenix-provider.vercel.app)>)
 -   [Demo]()
--   [API docs]()
+-   [API docs](https://github.com/vishva-kalhara/phoenix/blob/master/docs/endpoints.yaml)
 
 # Key Features
 
@@ -21,7 +21,7 @@ Secure your software with real-time license validation, Stripe integration for p
 
 # Getting Started
 
-1. [Sign Up]() for a Phoenix account.
+1. [Sign Up](https://phoenix-provider.vercel.app) for a Phoenix account.
 2. Create an app in the Phoenix dashboard.
 3. Generate API key & App Secret for integration.
 4. Add SDK for your project (Java, C#).
@@ -34,7 +34,7 @@ Secure your software with real-time license validation, Stripe integration for p
 
 # API Reference
 
-For more details about the API endpoints and usage, refer to the [endpoints.yaml]() file included in the documentation.
+For more details about the API endpoints and usage, refer to the [endpoints.yaml](https://github.com/vishva-kalhara/phoenix/blob/master/docs/endpoints.yaml) file included in the documentation.
 
 # Contributing
 
@@ -42,4 +42,4 @@ Contributions are welcome!
 
 # License
 
-This project is licensed under the Apache 2.0 License. See the [LICENSE]() file for more details.
+This project is licensed under the Apache 2.0 License. See the [LICENSE](https://github.com/vishva-kalhara/phoenix/blob/master/LICENSE) file for more details.
