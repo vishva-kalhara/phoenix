@@ -55,8 +55,8 @@ export const getAccessToken = async (
         );
         const data = await response.json();
 
-        const user = await userSchema.findOne({ externalId: data.id });
-        if (!user) createUser(data.id, data.email);
+        // const user = await userSchema.findOne({ externalId: data.id });
+        // if (!user) createUser(data.id, data.email);
 
         res.status(200).json(data);
     } catch (error) {
