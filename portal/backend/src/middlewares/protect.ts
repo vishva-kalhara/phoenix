@@ -20,7 +20,11 @@ export default async (req: Request, res: Response, next: NextFunction) => {
                 .redirect(`${process.env.FRONTEND_URL}/auth/sign-in`);
 
         const user = await userSchema.findOne({ externalId: data.id });
-        if (!user) createUser(data.id, data.email);
+        if (!user) {
+            return res
+                .status(401)
+                .redirect(`${process.env.FRONTEND_URL}/auth/sign-in`);
+        }
 
         req.body.user = user;
         next();
