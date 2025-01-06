@@ -168,9 +168,9 @@ const LandingPage = () => {
                         Free for now.
                     </p>
                     <div className="mt-8 flex gap-4 justify-center">
-                        <Link to="/waitlist">
+                        <Link to="/portal">
                             <Button className="bg-gradient-to-br from-[#C6FCA6] to-[#a7fceeba]">
-                                Join to waitlist
+                                Get Started Now
                             </Button>
                         </Link>
                     </div>

@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+    title: Phoenix API
+    description: API documentation for the Phoenix project
+    version: 1.0.0
+servers:
+    - url: http://localhost:3000/api/v1
+paths:
+    /applications:
+        post:
+            summary: Create a new application
+            tags:
+                - Applications
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                plans:
+                                    type: array
+                                    items:
+                                        type: object
+                                        properties:
+                                            planName:
+                                                type: string
+                                            validityInDays:
+                                                type: integer
+                                            price:
+                                                type: number
+            responses:
+                "201":
+                    description: Application created successfully
+                "400":
+                    description: Bad request
+                "500":
+                    description: Internal server error
+        get:
+            summary: Get all applications for the authenticated user
+            tags:
+                - Applications
+            responses:
+                "200":
+                    description: List of applications
+                "500":
+                    description: Internal server error
+    /applications/my-apps:
+        get:
+            summary: Get all applications for the authenticated user
+            tags:
+                - Applications
+            responses:
+                "200":
+                    description: List of applications
+                "500":
+                    description: Internal server error
+    /applications/{id}:
+        get:
+            summary: Get application details
+            tags:
+                - Applications
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Application details
+                "404":
+                    description: Application not found
+                "500":
+                    description: Internal server error
+        delete:
+            summary: Delete an application
+            tags:
+                - Applications
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "204":
+                    description: Application deleted successfully
+                "404":
+                    description: Application not found
+                "500":
+                    description: Internal server error
+        patch:
+            summary: Regenerate application secret
+            tags:
+                - Applications
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Application secret regenerated successfully
+                "404":
+                    description: Application not found
+                "500":
+                    description: Internal server error
+    /applications/{id}/stats:
+        get:
+            summary: Get application statistics
+            tags:
+                - Applications
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Application statistics
+                "500":
+                    description: Internal server error
+    /users/get-access-token:
+        get:
+            summary: Get access token
+            tags:
+                - Users
+            parameters:
+                - name: code
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Access token
+                "500":
+                    description: Internal server error
+    /users/me:
+        get:
+            summary: Get authenticated user details
+            tags:
+                - Users
+            responses:
+                "200":
+                    description: User details
+                "500":
+                    description: Internal server error
+    /users/new-api-key:
+        patch:
+            summary: Regenerate API key
+            tags:
+                - Users
+            responses:
+                "200":
+                    description: API key regenerated successfully
+                "500":
+                    description: Internal server error
+    /subscriptions/issue-subscription:
+        get:
+            summary: Issue a subscription
+            tags:
+                - Subscriptions
+            parameters:
+                - name: clientId
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: appId
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: amount
+                  in: query
+                  required: true
+                  schema:
+                      type: number
+                - name: validityInDays
+                  in: query
+                  required: true
+                  schema:
+                      type: integer
+                - name: token
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "302":
+                    description: Subscription issued successfully
+                "500":
+                    description: Internal server error
+    /subscriptions/has-subscription:
+        post:
+            summary: Check if a user has a subscription
+            tags:
+                - Subscriptions
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                appSecret:
+                                    type: string
+                                clientId:
+                                    type: string
+            responses:
+                "200":
+                    description: Subscription exists
+                "403":
+                    description: Subscription not found
+                "500":
+                    description: Internal server error
+    /payments/create-checkout-link:
+        post:
+            summary: Create a checkout link
+            tags:
+                - Payments
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                appSecret:
+                                    type: string
+                                clientId:
+                                    type: string
+            responses:
+                "200":
+                    description: Checkout link created successfully
+                "400":
+                    description: Bad request
+                "500":
+                    description: Internal server error
+    /tokens/delete-token/{token}:
+        get:
+            summary: Delete a token
+            tags:
+                - Tokens
+            parameters:
+                - name: token
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "302":
+                    description: Token deleted successfully
+                "400":
+                    description: Bad request
+                "500":
+                    description: Internal server error
