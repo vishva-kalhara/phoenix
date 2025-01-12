@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import applicationSchema from "../schemas/application-schema";
 import subscriptionSchema from "../schemas/subscription-schema";
 import mongoose from "mongoose";
+import { IUserDoc } from "../types/user-types";
+import { IApplication, IApplicationDoc } from "../types/application-types";
 
 export const createApp = async (
     req: Request,
@@ -60,10 +62,63 @@ export const getMyApps = async (
             isActive: true,
         });
 
+        const appsWithStats = await Promise.all(
+            apps.map(async (app) => {
+                const [uniqueUsers, totalEarnings] = await Promise.all([
+                    subscriptionSchema.aggregate([
+                        {
+                            $match: {
+                                appId: new mongoose.Types.ObjectId(app._id),
+                            },
+                        },
+                        {
+                            $group: {
+                                _id: "$clientId",
+                                count: {
+                                    $sum: 1,
+                                },
+                            },
+                        },
+                        {
+                            $count: "total",
+                        },
+                    ]),
+                    subscriptionSchema.aggregate([
+                        {
+                            $match: {
+                                appId: new mongoose.Types.ObjectId(app._id),
+                            },
+                        },
+                        {
+                            $group: {
+                                _id: "$amount",
+                                count: {
+                                    $sum: 1,
+                                },
+                            },
+                        },
+                    ]),
+                ]);
+
+                return {
+                    _id: app._id,
+                    name: app.name,
+                    stats: {
+                        totalEarned:
+                            totalEarnings.reduce(
+                                (acc, set) => acc + set._id * set.count,
+                                0
+                            ) || 0,
+                        totalUsers: uniqueUsers[0]?.total || 0,
+                    },
+                };
+            })
+        );
+
         res.status(200).json({
             status: "success",
-            count: apps.length,
-            apps,
+            count: appsWithStats.length,
+            apps: appsWithStats,
         });
     } catch (error) {
         console.error(error);

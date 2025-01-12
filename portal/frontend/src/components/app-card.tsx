@@ -15,13 +15,13 @@ const AppCard = ({ app }: { app: IApplication }) => {
                 <div className="flex gap-2 items-end mt-3">
                     <ChartNoAxesColumn className="size-5 opacity-60" />
                     <span className="text-xs text-white/60">
-                        $545 earned last month
+                        ${app.stats.totalEarned} earned
                     </span>
                 </div>
                 <div className="flex gap-2 items-end mt-[6px]">
                     <UsersRound className="size-5 opacity-60" />
                     <span className="text-xs text-white/60">
-                        64 Unique users
+                        {app.stats.totalUsers} Unique users
                     </span>
                 </div>
             </div>

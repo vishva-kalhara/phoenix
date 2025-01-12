@@ -29,10 +29,21 @@ const AppOverview = () => {
             </div>
 
             <div className="bg-transparent border border-white/15 p-6 rounded-lg flex flex-col">
-                <p className="text-sm md:text-normal text-white/70 leading-relaxed">
-                    Subscriptions
-                </p>
-                <OverviewChart chartData={currentAppStats?.chartData || []} />
+                {currentAppStats?.chartData.length &&
+                currentAppStats?.chartData.length < 2 ? (
+                    <p className="text-sm md:text-normal text-center my-32 text-white/70 leading-relaxed">
+                        Not enough data to visualize
+                    </p>
+                ) : (
+                    <>
+                        <p className="text-sm md:text-normal text-white/70 leading-relaxed">
+                            Subscriptions
+                        </p>
+                        <OverviewChart
+                            chartData={currentAppStats?.chartData || []}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );

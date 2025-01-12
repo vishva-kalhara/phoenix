@@ -10,4 +10,8 @@ export interface IApplication {
     isActive: boolean;
     createdAt: Date;
     _id: string;
+    stats: {
+        totalEarned: number;
+        totalUsers: number;
+    };
 }
