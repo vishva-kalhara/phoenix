@@ -1,6 +1,6 @@
-package com.wishva;
+package io.github.wishva;
 
-import com.wishva.phoenix.util.HardwareInfo;
+import io.github.wishva.phoenix.util.HardwareInfo;
 
 public class Main {
     public static void main(String[] args) {

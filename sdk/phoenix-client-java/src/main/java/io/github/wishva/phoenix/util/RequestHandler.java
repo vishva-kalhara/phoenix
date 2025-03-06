@@ -1,4 +1,4 @@
-package com.wishva.phoenix.util;
+package io.github.wishva.phoenix.util;
 
 import java.io.IOException;
 import java.net.URI;

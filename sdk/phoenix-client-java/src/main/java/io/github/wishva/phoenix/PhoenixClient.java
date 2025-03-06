@@ -1,8 +1,8 @@
-package com.wishva.phoenix;
+package io.github.wishva.phoenix;
 
-import com.wishva.phoenix.util.HardwareInfo;
-import com.wishva.phoenix.util.PhoenixException;
-import com.wishva.phoenix.util.RequestHandler;
+import io.github.wishva.phoenix.util.HardwareInfo;
+import io.github.wishva.phoenix.util.PhoenixException;
+import io.github.wishva.phoenix.util.RequestHandler;
 
 import java.awt.*;
 import java.io.IOException;

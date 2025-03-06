@@ -1,4 +1,4 @@
-package com.wishva.phoenix.util;
+package io.github.wishva.phoenix.util;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;

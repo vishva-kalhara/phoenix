@@ -1,4 +1,4 @@
-package com.wishva.phoenix.util;
+package io.github.wishva.phoenix.util;
 
 /**
  * Exception thrown when a valid subscription is not found.

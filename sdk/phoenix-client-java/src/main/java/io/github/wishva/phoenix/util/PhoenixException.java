@@ -1,4 +1,4 @@
-package com.wishva.phoenix.util;
+package io.github.wishva.phoenix.util;
 
 public class PhoenixException extends Exception {
 
