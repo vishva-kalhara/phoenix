@@ -4,9 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.wishva</groupId>
+    <groupId>io.github.vishva-kalhara</groupId>
     <artifactId>phoenix-client-java</artifactId>
     <version>1.0.0</version>
+
+    <name>Phoenix Client for Java</name>
+    <description>A cross-platform licensing and subscription management SDK for Java.</description>
+    <url>https://github.com/vishva-kalhara/phoenix/</url>
+
+    <developers>
+        <developer>
+            <name>Wishva Kalhara Chandrasekara</name>
+            <email>vishvakalhara@gmail.com</email>
+            <url>https://wishva.me/</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/vishva-kalhara/phoenix.git</connection>
+        <developerConnection>scm:git:ssh://github.com:vishva-kalhara/phoenix.git</developerConnection>
+        <url>https://github.com/vishva-kalhara/phoenix/tree/master/sdk/phoenix-client-java</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <licenses>
         <license>
@@ -20,7 +39,6 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
     <dependencies>
@@ -53,9 +71,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.0</version>
-                <configuration>
-                    <failOnWarnings>false</failOnWarnings>
-                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>

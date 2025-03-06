@@ -1,4 +1,4 @@
-package io.github.wishva.phoenix.util;
+package io.github.vishva_kalhara.phoenix.util;
 
 /**
  * Exception thrown when a valid subscription is not found.
