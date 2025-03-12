@@ -50,7 +50,7 @@ export const javaDocData: StepItemDataProps[] = [
                                 <ArrowUpRight className="size-3" />
                             </Button>
                         </Link>
-                        <Link to="https://drive.google.com/uc?export=download&id=1ATYK3iHyBe7eAfk5fLPSjO7q9EtImf_4">
+                        <Link to="https://github.com/vishva-kalhara/phoenix/tree/master/packages/phoenix-client-java-lib">
                             <Button className="bg-white/5 text-white border-white/10 border hover:bg-white/10">
                                 Download Dependancies (Optional){" "}
                                 <Download className="size-3" />
