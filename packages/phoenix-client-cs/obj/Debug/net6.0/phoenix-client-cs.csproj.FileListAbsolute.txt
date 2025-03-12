@@ -1,0 +1,13 @@
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.csproj.AssemblyReference.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.GeneratedMSBuildEditorConfig.editorconfig
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.AssemblyInfoInputs.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.AssemblyInfo.cs
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.csproj.CoreCompileInputs.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.sourcelink.json
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\bin\Debug\net6.0\phoenix-client-cs.deps.json
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\bin\Debug\net6.0\phoenix-client-cs.dll
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\bin\Debug\net6.0\phoenix-client-cs.pdb
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.dll
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\refint\phoenix-client-cs.dll
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\phoenix-client-cs.pdb
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net6.0\ref\phoenix-client-cs.dll

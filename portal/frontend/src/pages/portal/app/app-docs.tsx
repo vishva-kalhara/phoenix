@@ -4,7 +4,7 @@ import UnderConstructionDOc from "@/pages/docs/under-construction";
 import { useState } from "react";
 
 const AppDocs = () => {
-    const [language, setLanguage] = useState<"java" | "c-sharp" | "js">("java");
+    const [language, setLanguage] = useState<"java" | "c-sharp">("java");
 
     return (
         <div className="w-full max-w-4xl mx-auto  p-10">
@@ -36,16 +36,6 @@ const AppDocs = () => {
                         } `}
                     >
                         <img src="/icons8-c-sharp-logo.svg" />
-                    </div>
-                    <div
-                        onClick={() => setLanguage("js")}
-                        className={`p-4 bg-white/5 rounded-lg border-2 hover:cursor-pointer scale-90 ${
-                            language == "js"
-                                ? "border-white"
-                                : "opacity-75 border-white/0"
-                        } `}
-                    >
-                        <img src="/icons8-javascript.svg" />
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-16 mt-14">

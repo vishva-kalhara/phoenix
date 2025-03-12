@@ -1,0 +1,6 @@
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.csproj.AssemblyReference.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.GeneratedMSBuildEditorConfig.editorconfig
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.AssemblyInfoInputs.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.AssemblyInfo.cs
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.csproj.CoreCompileInputs.cache
+D:\intellij_proj\phoenix\sdk\phoenix-client-cs\obj\Debug\net9.0\phoenix-client-cs.sourcelink.json

@@ -126,14 +126,14 @@ const LandingPage = () => {
                         <div className="w-full flex flex-col gap-10">
                             {[
                                 {
-                                    heading: "Import the SDK",
-                                    description:
-                                        "Download & add our Java or C# SDK to your app.",
-                                },
-                                {
                                     heading: "Configure the Portal",
                                     description:
                                         "Setup your app and set subscription plans through our vendor portal.",
+                                },
+                                {
+                                    heading: "Import the Package",
+                                    description:
+                                        "Download & add our Java or C# package to your app.",
                                 },
                                 {
                                     heading: "Automate Revenue Collection",

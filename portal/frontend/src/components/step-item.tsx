@@ -28,7 +28,7 @@ const StepItem = ({ index, step }: StepItemProps) => {
                     </p>
                 </div>
             </div>
-            {step.markup}
+            <div className="ms-14 mt-2 min-h-10 rounded-lg">{step.markup}</div>
         </div>
     );
 };
