@@ -51,7 +51,7 @@ public class RequestHandler {
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create( API_URL + urlPath))
                 .header("Content-Type", "application/json") // Set Content-Type header
-                .header("Authorization", "Bearer " + this.apiKey) // Set Authorization header
+                .header("Authorization", this.apiKey) // Set Authorization header
                 .POST(HttpRequest.BodyPublishers.ofString(reqBody)) // Set request body
                 .build();
 

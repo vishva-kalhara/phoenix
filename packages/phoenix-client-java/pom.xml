@@ -6,7 +6,7 @@
 
     <groupId>io.github.vishva-kalhara</groupId>
     <artifactId>phoenix-client-java</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 
     <name>Phoenix Client for Java</name>
     <description>A cross-platform licensing and subscription management SDK for Java.</description>

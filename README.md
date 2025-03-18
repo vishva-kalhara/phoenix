@@ -2,7 +2,7 @@
 
 ![image](/docs/banner.png)
 
-A cross-platform licensing and subscription management SDK for Java, C#, and Electron applications.
+A cross-platform licensing and subscription management solution for Java, C#, and Electron applications.
 
 Secure your software with real-time license validation, Stripe integration for payments, and an intuitive dashboard to manage licenses and subscriptions. Built with security-first APIs and scalable licensing models, Phoenix simplifies software protection and monetization.
 
@@ -16,7 +16,7 @@ Secure your software with real-time license validation, Stripe integration for p
 -   Stripe integration for seamless payments.
 -   Scalable licensing models – subscription-based or perpetual.
 -   Secure, encrypted APIs to protect data.
--   Cross-platform SDKs for Java & C#.
+-   Cross-platform librarys for Java & C#.
 -   Easy-to-use developer dashboard for tracking.
 
 # Getting Started
@@ -24,13 +24,13 @@ Secure your software with real-time license validation, Stripe integration for p
 1. [Sign Up](https://phoenix-provider.vercel.app) for a Phoenix account.
 2. Create an app in the Phoenix dashboard.
 3. Generate API key & App Secret for integration.
-4. Add SDK for your project (Java, C#).
+4. Add library for your project (Java, C#).
 5. Follow integration steps outlined in the docs.
 
-# SDKs
+# libraries
 
--   [Download Java SDK](https://drive.google.com/uc?export=download&id=1YgiE5__8114yk-MtKSy6urSjB7Zs_I6Y)
--   [Download C# SDK _(In Development)_]()
+-   [Download Java Library](https://mvnrepository.com/artifact/io.github.vishva-kalhara/phoenix-client-java)
+-   [Download C# Library _(In Development)_]()
 
 # API Reference
 

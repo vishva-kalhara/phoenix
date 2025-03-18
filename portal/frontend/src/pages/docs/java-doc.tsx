@@ -39,7 +39,7 @@ export const javaDocData: StepItemDataProps[] = [
                         {`<dependency>
     <groupId>io.github.vishva-kalhara</groupId>
     <artifactId>phoenix-client-java</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 `}
                     </SyntaxHighLighter>
